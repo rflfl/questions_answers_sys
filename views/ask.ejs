@@ -2,11 +2,11 @@
     <%- include ('partials/navbar.ejs') %>
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-primary text-white">
                 <h2>Ask Your Question</h2>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="/save-ask" method="POST">
                     <fieldset>
                         <div class="my-2">
                             <label class="form-label" for="questionTitle">Title</label>
@@ -14,7 +14,7 @@
                         </div>
                         <div class="my-2">
                             <label class="form-label" for="questionDescription">Description</label>
-                            <textarea type="text" name="title" id="questionDescription" class="form-control"></textarea>
+                            <textarea type="text" name="description" id="questionDescription" class="form-control"></textarea>
                         </div>
                         <button class="btn btn-success" type="submit">
                             Send
