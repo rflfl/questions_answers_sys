@@ -65,7 +65,6 @@ app.get('/question/:id', (req, res) => {
                     ['id', 'DESC']
                 ]
             }).then(answers => {
-                console.log(answers)
                 res.render('question', {
                     question: question,
                     answers : answers
