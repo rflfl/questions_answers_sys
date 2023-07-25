@@ -4,6 +4,7 @@ const port = 3000
 const bodyParser = require('body-parser')
 const connection = require('./database/database')
 const QuestionModel = require('./database/Question')
+const AnswerModel = require('./database/Answer')
 
 //database
 connection
@@ -22,9 +23,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-    QuestionModel.findAll({ raw: true, order: [
-        ['id','DESC']
-    ]}).then(data => {
+    QuestionModel.findAll({
+        raw: true, order: [
+            ['id', 'DESC']
+        ]
+    }).then(data => {
         res.render('index', {
             questions: data
         })
@@ -51,15 +54,27 @@ app.get('/question/:id', (req, res) => {
         where: {
             id: id
         }
-    }).then( question => {
-        if( question != undefined){
+    }).then(question => {
+        if (question != undefined) {
             res.render('question', {
                 question: question
             })
-        }else{
+        } else {
             res.redirect('/')
         }
     })
+})
+
+app.post('/save-answer', (req, res) => {
+    let body = req.body.body
+    let questionId = req.body.questionID
+    AnswerModel.create({
+        body: body,
+        question_id: questionId
+    }).then(() => {
+        res.redirect('/question/' + questionId)
+    })
+
 })
 
 app.listen(port, () => {

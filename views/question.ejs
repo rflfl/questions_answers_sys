@@ -5,5 +5,19 @@
     <h1><%= question.title %></h1>
     <hr>
     <p><%= question.description %></p>
+    <hr>
+    <form action="/save-answer" method="POST">
+        <h3>Answer</h3>
+        <fieldset>
+            <div class="my-2">
+                <label class="form-label" for="answerBody">Answer:</label>
+                <textarea name="body" id="answerBody" class="form-control"></textarea>
+            </div>
+            <input type="hidden" name="questionID" value="<%= question.id %>">
+            <button class="btn btn-primary" type="submit">
+                Send my answer
+            </button>
+        </fieldset>
+    </form>
 </div>
 <%- include ('partials/footer.ejs') %>
