@@ -45,6 +45,23 @@ app.post('/save-ask', (req, res) => {
     })
 })
 
+app.get('/question/:id', (req, res) => {
+    let id = req.params.id
+    QuestionModel.findOne({
+        where: {
+            id: id
+        }
+    }).then( question => {
+        if( question != undefined){
+            res.render('question', {
+                question: question
+            })
+        }else{
+            res.redirect('/')
+        }
+    })
+})
+
 app.listen(port, () => {
     console.log(`Sever rodando na porta ${port}`)
 })
